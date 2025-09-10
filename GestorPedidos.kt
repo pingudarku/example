@@ -24,10 +24,16 @@ object GestorPedidos {
     /* ===== Catálogo Inicial ===== */
     // Inicializa el catálogo con productos base
     fun inicializarCatalogo(): List<Producto> = listOf(
-        Comida(esPremium = false, base = 8_990, prepMin = 10),     // Hamburguesa Clásica
-        Comida(esPremium = true,  base = 15_990, prepMin = 15),    // Salmón Grillado (Premium)
+        Comida(esPremium = false, base = 8_990, prepMin = 10, nombreComida = "Hamburguesa Clásica"),     // Hamburguesa Clásica
+        Comida(esPremium = true, base = 12_990, prepMin = 10, nombreComida = "Hamburguesa Tres Carnes"),
+        Comida(esPremium = true,  base = 15_990, prepMin = 15, nombreComida = "Salmón Grillado"),    // Salmón Grillado (Premium)
+        Comida(esPremium = true,  base = 12_990, prepMin = 18, nombreComida = "Bife a lo Pobre"),
+        Comida(esPremium = false,  base = 6_990, prepMin = 4, nombreComida = "Papas Fritas con Carne Mechada"),
+        Comida(esPremium = false,  base = 5_990, prepMin = 4, nombreComida = "Papas Fritas con Merluza"),
         Bebida(marca = "Coca Cola", tamano = TamanoBebida.MEDIANO, base = 1_990),
-        Bebida(marca = "Jugo Natural", tamano = TamanoBebida.GRANDE, base = 2_990)
+        Bebida(marca = "Coca Cola", tamano = TamanoBebida.PEQUENO, base = 990),
+        Bebida(marca = "Jugo Natural (Sabores)", tamano = TamanoBebida.GRANDE, base = 2_990),
+        Bebida(marca = "Jugo Natural (Sabores)", tamano = TamanoBebida.MEDIANO, base = 1_990)
     )
 
     /* ===== Cálculos ===== */
@@ -68,8 +74,8 @@ object GestorPedidos {
         return totalPromo to descripciones
     }
     // Calcula el IVA sobre un monto
-    fun iva(sobre: Int, tasa: Double = 0.19): Int =
-        (sobre * tasa).roundToInt()
+    fun iva(valor: Int, tasa: Double = 0.19): Int =
+        (valor * tasa).roundToInt()
 
     /* ===== Reporte (operaciones funcionales) ===== */
     // Clases para manejar reportes de ventas

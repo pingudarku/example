@@ -22,7 +22,8 @@ data class Comida(
     val esPremium: Boolean,
     private val base: Int,
     private val prepMin: Int,
-    private val cat: String = "Comida"
+    private val cat: String = "Comida",
+    val nombreComida: String // Nombre de la comida!!
 ) : Producto(
     nombre = "", // Se arma en init
     precioBase = base,
@@ -41,8 +42,11 @@ data class Comida(
 
     // Inicializador para forzar nombre adecuado según si es premium o no
     // truco para permitir nombre en primario sin repetir lógica de require
-    init {
-        val n = if (esPremium) "Salmón Grillado" else "Hamburguesa Clásica"
+
+    init { //mejorar para que acepte mas productos
+
+        //val nombreProducto = if (esPremium) "Salmón Grillado" else "Hamburguesa Clásica" //codigo viejo
+        val nombreProducto = nombreComida //codigo nuevo, solo toma el nombre y lo muestra bien
         // Hack para asignar valor al campo protegido del padre
         // Usamos reflexión mínima: asignamos por copia
         // (para conservar data class y no romper los requires del padre)
@@ -50,7 +54,7 @@ data class Comida(
         (this as Producto).apply {
             val field = this::class.java.superclass.getDeclaredField("nombre")
             field.isAccessible = true
-            field.set(this, n)
+            field.set(this, nombreProducto)
         }
     }
 }
